@@ -25,7 +25,7 @@ Traditional neural networks can not remember past information. They can only pro
 
 Gradient is a fancy words for slope of line(_for 2D space_) a.k.a derivative. We use gradient to find minimum points of the function. I think this quote will give intuitive explanation: _The gradient will act like a compass and always point us downhill. To compute it, we will need to differentiate our error function._ We can say that, gradient descent is a way to minimize objective function. (Gradient descent is an optimization algorithm that minimizes functions.) This optimization technique is based on repetition. For the initialization, model guess some parameter and according to gradient (derivative) of objective function, model updates their parameter. As you expect, its usage for Deep Learning comes with the loss(cost) function. Most of the time, our aim is minimize the loss(cost) function for DL models. Gradient based methods learn a parameter's value (weights of node or biases) by understanding how a small change in this parameter's value will affect the outputs of the network. When vanishing gradient problem occurs, gradient of early layers of the model's parameters' become very small. Thus, DL model can not find the better value for parameter effectively to decrease loss function with find the minimum point of line thanks to gradient.
 
-- _You can check this excellent resource for mathematical and graphical explanation of gradient descent:_ http://fa.bianp.net/teaching/2018/eecs227at/gradient_descent.html
+_You can check this excellent [resource](http://fa.bianp.net/teaching/2018/eecs227at/gradient_descent.html) for mathematical and graphical explanation of gradient descent:_ 
 
 
 
