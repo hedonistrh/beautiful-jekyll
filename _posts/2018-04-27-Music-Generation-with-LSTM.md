@@ -549,3 +549,6 @@ def how_many_repetitive_func(array, from_where=0, continuation=0.0):
 ## Results
 
 Let's listen some outputs of the system. :notes:
+
+[Soundcloud height="390" url="
+https://soundcloud.com/user-628541747/sets/bestekars-lstm"]
