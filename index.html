@@ -7,14 +7,6 @@ use-site-title: true
 
 <div class="posts-list">
   {% for post in paginator.posts %}
-    show title, date, etc
-    {% assign words = post.content | number_of_words %}
-    {% if words < 360 %}
-      1 min
-    {% else %}
-      {{ words | divided_by:180 }} mins
-    {% endif %}
-  {% end %}
   <article class="post-preview">
     <a href="{{ post.url | prepend: site.baseurl }}">
 	  <h2 class="post-title">{{ post.title }}</h2>
