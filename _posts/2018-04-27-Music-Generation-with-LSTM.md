@@ -1,4 +1,4 @@
-# My Journey to Music-Speech with Deep Learning Journey (Part 1) - Music Generation with LSTM 
+# My Journey to Music-Speech with Deep Learning (Part 1) - Music Generation with LSTM 
 
 
 
