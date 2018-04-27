@@ -551,3 +551,6 @@ Let's listen some outputs of the system.
 _I have used 55 different piano music for game for these outputs._
 
 <iframe width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/506986707&color=%23ff9900&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+
+
+I want to say _thanks_ to [Oguzhan Ergin](https://github.com/OguzhanE) for his support.
