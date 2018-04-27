@@ -9,7 +9,7 @@ Neural networks are widely used in different areas such as cancer detection, aut
 
 Also, we can see great efforts in this area like [Google's Magenta](https://magenta.tensorflow.org) and [Aiva](http://www.aiva.ai) which is Luxembourg based startup for music generation. Especially, [Aiva's musics](https://www.youtube.com/watch?v=HAfLCTRuh7U) are amazing and their contents are registered under the France and Luxembourg authors’ right society (SACEM).
 
- With this impression, I want to start my own journey to this area. And this blog-post explains my first step to this journey. :school_satchel: :tada:
+ With this impression, I want to start my own journey to this area. And this blog-post explains my first step to this journey. 
 
 
 ## LSTM
@@ -546,6 +546,8 @@ def how_many_repetitive_func(array, from_where=0, continuation=0.0):
 
 ## Results
 
-Let's listen some outputs of the system. :notes:
+Let's listen some outputs of the system. 
+
+_I have used 55 different piano music for game for these outputs._
 
 <iframe width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/506986707&color=%23ff9900&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
