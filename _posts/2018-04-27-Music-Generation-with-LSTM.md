@@ -262,8 +262,6 @@ midis_array.shape
 max_len = 18 # how many column will take account to predict next column.
 step = 1 # step size.
 
-# ADD ILLUSTRATION ABOUT THIS PROCESS.
-
 previous_full = []
 predicted_full = []
 
