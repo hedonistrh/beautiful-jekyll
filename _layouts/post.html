@@ -10,6 +10,13 @@ layout: base
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
+      {% assign words = content | number_of_words %}
+      {% if words < 360 %}
+        1 min
+      {% else %}
+        {{ words | divided_by:180 }} mins
+      {% endif %}
+
       {% if page.gh-repo %}
         {% assign gh_split =  page.gh-repo | split:'/'  %}
         {% assign gh_user =  gh_split[0]  %}
