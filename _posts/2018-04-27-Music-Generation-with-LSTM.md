@@ -548,7 +548,7 @@ def how_many_repetitive_func(array, from_where=0, continuation=0.0):
 
 Let's listen some outputs of the system. 
 
-_I have used 55 different piano music for game for these outputs._
+_I have used 55 different piano music for game for these outputs. I have trained my model 15 hours with [Google Colab](https://hackernoon.com/train-your-machine-learning-models-on-googles-gpus-for-free-forever-a41bd309d6ad)._
 
 <iframe width="100%" height="450" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/506986707&color=%23ff9900&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
 
