@@ -37,7 +37,7 @@ This type of files do not include actual audio as opposed to _.mp3_ and _.wav_. 
 
 ![alt text](https://docs.google.com/uc?id=1mM1hT6rDpo_F0YEG3BPlVKJxHqPJKKYo)
 
-_.mid_ files can include different instruments such as _flute, _obua,muted bass_. However, we are using just piano part of _.mid_ files for this post. 
+_.mid_ files can include different instruments such as _flute, _obua_ ,_muted bass_. However, we are using just piano part of _.mid_ files for this post. 
 
 ## Framework
 
