@@ -1,5 +1,7 @@
 # Literature Review for Speaker Change Detection
 
+**Draft version. So that, there can be many typos and unreferenced quote. I will add their result and dataset. In addition to that, I will add some papers. Feel free to send e-mail to me.**
+
 In general, a speaker diarization system consists of two main parts: segmentation and clustering. Segmentation aims to detect all speaker change points. The most widely used method is the Bayesian Information Criterion (BIC) based segmentation. More recently, researcher focus to using of Deep Learning. 
 
 Speaker diarization is the task of determining “who spoke when” in an audio stream that usually contains an unknown amount of speech from an unknown number of speakers. Speaker change detection is an important part of speaker diarization systems. It aims at finding the boundaries between speech turns of two different speakers.
@@ -99,13 +101,38 @@ They are trying to solve speaker diarization problem via 2-step approach.
 
 After that, system compare embeddings via cosine similarity. If difference is bigger than determined threshold, system say _this comes from different speaker_.
 
+### 6) [_SPEAKER DIARIZATION WITH LSTM_](https://arxiv.org/abs/1710.10468)
 
-### 6) [_Deep Learning Approaches for Online Speaker Diarization_](http://web.stanford.edu/class/cs224s/reports/Chaitanya_Asawa.pdf)
+### 7) [_VoxCeleb2: Deep Speaker Recognition_](https://arxiv.org/abs/1806.05622)
+
+_"In this paper, we present a deep CNN based neural speaker embedding system, named VGGVox, trained to map voice spectrograms to a compact Euclidean space where distances directly correspond to a measure of speaker similarity."_
+
+This paper is related to _speaker verification_, however, their method and dataset can be useful to detect speaker change points. 
+
+Their deep learning architecture consists of:
+    - Deep CNN _trunk_ architecture to extract features. (*VGG_M and ResNet are their trunk architecture for this work. These works very well for image classification task. They just modified some part of these to make suitable for speech case.*)
+
+    - Pooling layer to aggregate feature to provide a single embedding.
+
+    - Pairwise Loss 
+
+They train *VGGVox* on short-term magnitude spectograms (a hamming window of width 25ms and step 10ms, without other pre-processing) in order to learn speaker discriminative embeddings via 2-step.
+
+    - Pre-training for identification using a softmax loss. With this pre-training, they can initialize their system weights.
+
+    - Fine-Tuning with the contrastive loss.
+
+Their dataset both include audio and video.
+
+### 8) [_Deep Learning Approaches for Online Speaker Diarization_](http://web.stanford.edu/class/cs224s/reports/Chaitanya_Asawa.pdf)
 
 Recently, there has been more work applying deep learning to speaker diarization problem.
+
     - Learn speaker embeddings and use these embeddings to classify.
+
     - Represent speaker identity using i-vectors.
-    - BiLSTM RNN 
+
+    - Bi-LSTM RNN 
 
 In this paper, researchers have tried various strategies to tackle this problem.
 
@@ -113,8 +140,7 @@ In this paper, researchers have tried various strategies to tackle this problem.
 
     - _"In training, we take segments of audio from different speakers, and construct a triple that consists of (an anchor, a positive example, a negative example) where the anchor and positive example both come from the same speaker but the negative example is from a different speaker. We then want to generate embeddings such that the embedding for the anchor is closer to the positive example embedding by some margin greater than the distance from the embedding for the anchor to the negative example embedding."_
 
-    - "_Then, when performing online diarization, we
-    will run windows of speech through the LSTM to create an embedding for this window. If the produced vector is within some distance (using the L2 distance and a tuned threshold) of the stored current speaker vector, we deem that it is the same speaker. Otherwise, we detect that the speaker has changed, and compare the vector with the stored vector for each of the past speakers."_
+    - _"Then, when performing online diarization, we will run windows of speech through the LSTM to create an embedding for this window. If the produced vector is within some distance (using the L2 distance and a tuned threshold) of the stored current speaker vector, we deem that it is the same speaker. Otherwise, we detect that the speaker has changed, and compare the vector with the stored vector for each of the past speakers."_
 
 ![alt text](https://docs.google.com/uc?id=1OyIY9tihqcoulIvD4Dvg0l_TqPCV3Vv8)
  
@@ -124,7 +150,7 @@ Their proposed system can not capture some speaker changes which are short segme
 - _"Even in this task, we found that our models had difficulty capturing speaker change. As Figure 5 indicates, speakers are mostly speaking for few seconds each time they speak in a conversation – for example, we can imagine a lot of back-and-forth consisting of short segments: “(sentence)” “yeah” “(sentence)” “sure.” As a human listener, however, often these short snippets are looked over. This makes the problem of speaker detection very challenging because the model needs to rapidly identify that the speaker has changed and must also do this often."_
 
 
-### 7) [_Blind Speaker Clustering Using Phonetic and Spectral Features in Simulated and Realistic Police Interviews_](http://oxfordwaveresearch.com/papers/IAFPA-2012-BlindClusteringAlexanderForthPresentation.pdf)
+### 9) [_Blind Speaker Clustering Using Phonetic and Spectral Features in Simulated and Realistic Police Interviews_](http://oxfordwaveresearch.com/papers/IAFPA-2012-BlindClusteringAlexanderForthPresentation.pdf)
 
 This paper is related to product of Oxford Wave Research called as _Cleaver_. They focus on the pitch tracking. According to them, if there is any significant discontunies either in time or frequency, is used to define a candidate transition between spekaers and cluster. Let's look their proposed method step by step.
 
