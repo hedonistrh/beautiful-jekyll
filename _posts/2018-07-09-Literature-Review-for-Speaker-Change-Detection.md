@@ -95,6 +95,7 @@ They use the MFCC which comes from overlapping slicing windows as input, output 
 They are trying to solve speaker diarization problem via 2-step approach.
 
 - To classify speaker, train a NN in a supervised manner. When they train the system, weighted spectogram is used as an input and cross-entropy as a loss function.
+
     - _"Weighting STFT with proper perceptual weighting filters may overcome noise and pitch variability."_ Also, they applied some pre-processing like downsampling and hamming window.
 
 - Use this pretrained NN to extract speaker embeddings which is time-dependent speaker charecteristic.
@@ -103,6 +104,51 @@ After that, system compare embeddings via cosine similarity. If difference is bi
 
 ### 6) [_SPEAKER DIARIZATION WITH LSTM_](https://arxiv.org/abs/1710.10468)
 
+_"In this paper, we build on the success of d-vector based speaker verification systems to develop a new d-vector based approach to speaker diarization. Specifically, we combine LSTM-based d-vector audio embeddings with recent work in non-parametric clustering to obtain a state-of-the-art speaker diarization system._
+
+Their sistem is combination of 
+- LSTM-based speaker verification model to extract speaker embeddings
+- Non-parametric spectral clustering. They apply clustering algorithm to these embeddings in order to speaker diarization.
+
+They obtain a state-of-art system for speaker diarization with this combination.
+
+![alt text](https://docs.google.com/uc?id=1-kFDCGZ1itf4urm8JqOe9A_WoXwKn0qZ)
+
+They have tried 4 different clustering algorithm in their paper. Two of them is belongs to online clustering (system label the segment when it is available, without seeing feature segments) and two of them is belongs to offline clustering (system label the segment when all segments are available). Offline clustering outperforms the online clustering.
+
+- Naive online clustering, Links online clustering
+- K-means offline clustering, **Spectral offline clustering**
+
+Spectral offline clustering algorithm consists of the following steps: 
+
+- Construct the affinity matrix. This matrix's elements represent the cosine similarity between segment embedding.
+
+- Apply some refinement operations on the affinity matrix
+    - Gaussian Blur to smooth the data. With this, reduce the effect of outliers.
+    - Row-wise thresholding _(for each row, if elementssmaller than some threshold, set this element to 0)_
+    - Symmetrization to restore matrix symmetry which is crucial for algorithm.
+    - Diffusion to sharpen the matrix. Thus, we have more clear boundaries between speakers.
+    - Row-wise max normalization to get rid of undesirable scale effects.
+
+- Perform eigen decomposition.
+
+_Note: For more info about all process, please look the paper._
+
+![alt text](https://docs.google.com/uc?id=1N6KXrk_hdmS422YOU_-Wd-t3kVIpzYpk)
+
+
+The writers discuss why we can not conventional clustering algorithms like K-mean. The problem comes from speech data's properties.
+- *Non-Gaussian Distribution*: Speech data are often not-gaussian.
+- *Cluster Imbalance*: For most of the recordings, mostly one speaker speaks. And if we use K-means, unfortunately, it can split this cluster into smaller cluster.
+- *Hierarchical Structure*: The difference between one male and one female speaker is more than the difference between two male's clusters. This property, mostly, cause to K-means cluster all male's embeddings into one cluster and all female's embeddings into another cluster.
+
+So that, they offer the novel *non-parametric spectral clustering* to solve these problems. 
+
+
+
+
+[_Poster of the paper_](sigport.org/sites/default/files/docs/icassp2018_diarization_poster.pdf)
+
 ### 7) [_VoxCeleb2: Deep Speaker Recognition_](https://arxiv.org/abs/1806.05622)
 
 _"In this paper, we present a deep CNN based neural speaker embedding system, named VGGVox, trained to map voice spectrograms to a compact Euclidean space where distances directly correspond to a measure of speaker similarity."_
@@ -110,17 +156,18 @@ _"In this paper, we present a deep CNN based neural speaker embedding system, na
 This paper is related to _speaker verification_, however, their method and dataset can be useful to detect speaker change points. 
 
 Their deep learning architecture consists of:
-    - Deep CNN _trunk_ architecture to extract features. (*VGG_M and ResNet are their trunk architecture for this work. These works very well for image classification task. They just modified some part of these to make suitable for speech case.*)
+- Deep CNN _trunk_ architecture to extract features. 
+    - *VGG_M and ResNet are their trunk architecture for this work. These works very well for image classification task. They just modified some part of these to make suitable for speech case.*
 
-    - Pooling layer to aggregate feature to provide a single embedding.
+- Pooling layer to aggregate feature to provide a single embedding.
 
-    - Pairwise Loss 
+- Pairwise Loss 
 
 They train *VGGVox* on short-term magnitude spectograms (a hamming window of width 25ms and step 10ms, without other pre-processing) in order to learn speaker discriminative embeddings via 2-step.
 
-    - Pre-training for identification using a softmax loss. With this pre-training, they can initialize their system weights.
+- Pre-training for identification using a softmax loss. With this pre-training, they can initialize their system weights.
 
-    - Fine-Tuning with the contrastive loss.
+- Fine-Tuning with the contrastive loss.
 
 Their dataset both include audio and video.
 
