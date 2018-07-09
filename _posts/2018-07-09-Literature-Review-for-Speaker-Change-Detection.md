@@ -145,9 +145,7 @@ The writers discuss why we can not conventional clustering algorithms like K-mea
 So that, they offer the novel *non-parametric spectral clustering* to solve these problems. 
 
 
-
-
-[_Poster of the paper_](sigport.org/sites/default/files/docs/icassp2018_diarization_poster.pdf)
+[_Poster of the paper_](https://sigport.org/sites/default/files/docs/icassp2018_diarization_poster.pdf)
 
 ### 7) [_VoxCeleb2: Deep Speaker Recognition_](https://arxiv.org/abs/1806.05622)
 
