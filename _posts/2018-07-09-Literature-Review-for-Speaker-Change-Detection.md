@@ -2,6 +2,10 @@
 
 **Draft version. So that, there can be many typos and unreferenced quote. I will add their result and dataset. In addition to that, I will add some papers. Feel free to send e-mail to me.**
 
+Some useful links for dataset:
+- https://voice.mozilla.org/en/data
+- http://www.robots.ox.ac.uk/~vgg/data/voxceleb2/
+
 In general, a speaker diarization system consists of two main parts: segmentation and clustering. Segmentation aims to detect all speaker change points. The most widely used method is the Bayesian Information Criterion (BIC) based segmentation. More recently, researcher focus to using of Deep Learning. 
 
 Speaker diarization is the task of determining “who spoke when” in an audio stream that usually contains an unknown amount of speech from an unknown number of speakers. Speaker change detection is an important part of speaker diarization systems. It aims at finding the boundaries between speech turns of two different speakers.
@@ -228,8 +232,6 @@ Note: They use pre-training with a softmax layer and cross entropy over a fixed 
 
 ##### _For more info, please look the [paper](https://arxiv.org/abs/1705.02304v1)._
 
-
-
 **Experiment**
 
 - Outperforms a [DNN-based i-vector baseline](https://ieeexplore.ieee.org/document/6853887/). Both methods use VAD processing.
@@ -244,6 +246,32 @@ _Text-Independent Results_
 _"In this paper we present a novel end-to-end speaker embedding scheme, called Deep Speaker. The proposed system directly learns a mapping from speaker utterances to a hypersphere where cosine similarities directly correspond to a measure of speaker similar- ity. We experiment with two different neural network architectures (ResCNN and GRU) to extract the frame-level acoustic features. A triplet loss layer based on cosine similarities is proposed for metric learning, along with a batch-global negative selection across GPUs. Softmax pre-training is used for achieving better performance."_
 
 ### 8) [_Unspeech: Unsupervised Speech Context Embeddings_](https://arxiv.org/abs/1804.06775v1)
+
+Their method is based on _unsupervised_ learning. They train the system on up to 9500 hours English speech data with negative sampling method. They use _Siamese Convolutional Neural Network_ architecture to train _Unspeech_ embeddings. Their system is based on TDNN _(Time-Delayed Neural Network)_-HMM acoustic model to cluster.
+
+Their idea comes from negative sampling in word2vec. 
+
+##### Check [this blogpost](http://mccormickml.com/2017/01/11/word2vec-tutorial-part-2-negative-sampling/) to understand negative sampling.
+
+- System take the current segment as _target_ and target's left and right segments as _true context_. In addition to that, randomly sample four _negative context_.   
+
+![alt text](https://docs.google.com/uc?id=1_aFaOp5J42oCErnNKYwQN6VNzyBXx25o)
+
+- System use the _VGG16A_ network to convert these segments into embeddings.
+
+![alt text](https://docs.google.com/uc?id=1WDST1HnAqGSM5W4YF07hhrFD8yL2H1iu)
+
+- Train the system as binary classification task via logistic loss. 
+
+**Experiment**
+
+For same/different speaker experiment.
+
+![alt text](https://docs.google.com/uc?id=1AdUzI8T3W8uy-HAZberEYDcoODe5sBhg)
+
+
+
+
 
 ### 9) [_VoxCeleb2: Deep Speaker Recognition_](https://arxiv.org/abs/1806.05622)
 
