@@ -177,7 +177,7 @@ Spectral offline clustering algorithm consists of the following steps:
 
 - Perform eigen decomposition.
 
-##### _For more info, please look the [paper](https://arxiv.org/abs/1710.10468._
+##### _For more info, please look the [paper](https://arxiv.org/abs/1710.10468)
 
 ![alt text](https://docs.google.com/uc?id=1N6KXrk_hdmS422YOU_-Wd-t3kVIpzYpk)
 
