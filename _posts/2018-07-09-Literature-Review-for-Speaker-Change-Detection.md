@@ -215,13 +215,26 @@ Their deep learning architecture consists of:
 
 - Pairwise Loss 
 
-They train *VGGVox* on short-term magnitude spectograms (a hamming window of width 25ms and step 10ms, without other pre-processing) in order to learn speaker discriminative embeddings via 2-step.
+They train *VGGVox* ,which is their neural embedding system, on short-term magnitude spectograms (a hamming window of width 25ms and step 10ms, without other pre-processing) in order to learn speaker discriminative embeddings via 2-step.
 
 - Pre-training for identification using a softmax loss. With this pre-training, they can initialize their system weights.
 
 - Fine-Tuning with the contrastive loss.
 
-Their dataset both include audio and video.
+[Their dataset](http://www.robots.ox.ac.uk/~vgg/data/voxceleb2) both include audio and video.
+
+![alt text](https://docs.google.com/uc?id=1L1G11lDbNAW4W20MTDSwi_qgEUW4sPwz)
+
+**Experiment**
+
+- They train the system on the _VoxCeleb2_ and test on the _VoxCeleb1_. They use _Equal Error Rate(EER)_ and their _cost function_ for evaluation. 
+- _"During training, we randomly sample 3-second segments from each utterance._
+
+![alt text](https://docs.google.com/uc?id=1_8wu8sYQBJVRK3u5877tEv4kXYRF_KFY)
+
+_"In this paper, we have introduced new architectures and training strategies for the task of speaker verification, and demonstrated state-of-the-art performance on the VoxCeleb1 dataset. Our learnt identity embeddings are compact (512D) and hence easy to store and useful for other tasks such as diarisation and retrieval."_
+
+
 
 ### 8) [_Deep Learning Approaches for Online Speaker Diarization_](http://web.stanford.edu/class/cs224s/reports/Chaitanya_Asawa.pdf)
 
