@@ -270,8 +270,7 @@ For same/different speaker experiment.
 ![alt text](https://docs.google.com/uc?id=1AdUzI8T3W8uy-HAZberEYDcoODe5sBhg)
 
 
-
-
+[Preview of the paper from the writer](http://unspeech.net/preview/)
 
 ### 9) [_VoxCeleb2: Deep Speaker Recognition_](https://arxiv.org/abs/1806.05622)
 
