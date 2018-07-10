@@ -57,7 +57,7 @@ Methodology of this work
     - Get all possible speaker homogeneous regions.
     - Retrain the same DNN again on these homogeneous segments of speech.
 
-**Experiments**
+**Experiment**
 
 - They use data from TED-LIUM and Youtube for training. To compare baseline methods, they use TED-LIUM evaluation data.
 
@@ -103,7 +103,7 @@ They use the MFCC which comes from overlapping slicing windows as input, output 
 
 - Long audio sequences are split into short fixed-length overlapping sequences. These are 3.2s long with a step of 800 ms.
 
-**Experiments**
+**Experiment**
 
 - They use ETAPE TV subset. 
 - MFCC as input. 
@@ -197,9 +197,6 @@ So that, they offer the novel *non-parametric spectral clustering* to solve thes
 - They compare their result with state-of-art algorithms on CALLHOME dataset.
 
 ![alt text](https://docs.google.com/uc?id=1X1-cSylanhsYDKce1ThDj69kX2h_LiHt)
-
-
-
 
 
 [_Poster of the paper_](https://sigport.org/sites/default/files/docs/icassp2018_diarization_poster.pdf)
