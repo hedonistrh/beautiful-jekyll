@@ -59,7 +59,7 @@ Methodology of this work
 
 **Experiment**
 
-- They use data from TED-LIUM and Youtube for training. To compare baseline methods, they use TED-LIUM evaluation data.
+- They use data from [TED-LIUM](http://www.openslr.org/7/) and Youtube for training. To compare baseline methods, they use TED-LIUM evaluation data.
 
 ![alt text](https://docs.google.com/uc?id=1ka7SDKEY481IF1Vfd0lmVSXyTP2I8F8h)
 
