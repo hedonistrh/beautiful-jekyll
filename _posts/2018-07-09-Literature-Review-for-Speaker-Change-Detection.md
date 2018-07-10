@@ -192,12 +192,11 @@ So that, they offer the novel *non-parametric spectral clustering* to solve thes
 **Experiment**
 
 - VAD is used.
-- They use [_pyannote.metrics_](https://github.com/pyannote/pyannote-audio) library for evaluation.
+-- They use [_pyannote.metrics_](https://github.com/pyannote/pyannote-audio) library for evaluation.
 - Fine tune parameters for each dataset.
 - For CALLHOME dataset, they tolerate errors less than 250 ms in locating segment boundaries.
 - Exclude overlapped speech.
 - In general, they observed that d-vector based systems outperform i-vector based systems.
-
 - They compare their result with state-of-art algorithms on CALLHOME dataset.
 
 ![alt text](https://docs.google.com/uc?id=1X1-cSylanhsYDKce1ThDj69kX2h_LiHt)
@@ -281,15 +280,12 @@ This paper is related to _speaker verification_, however, their method and datas
 Their deep learning architecture consists of:
 - Deep CNN _trunk_ architecture to extract features. 
     - *VGG_M and ResNet are their trunk architecture for this work. These works very well for image classification task. They just modified some part of these to make suitable for speech case.*
-
 - Pooling layer to aggregate feature to provide a single embedding.
-
 - Pairwise Loss 
 
 They train *VGGVox* ,which is their neural embedding system, on short-term magnitude spectograms (a hamming window of width 25ms and step 10ms, without other pre-processing) in order to learn speaker discriminative embeddings via 2-step.
 
 - Pre-training for identification using a softmax loss. With this pre-training, they can initialize their system weights.
-
 - Fine-Tuning with the contrastive loss.
 
 [Their dataset](http://www.robots.ox.ac.uk/~vgg/data/voxceleb2) both include audio and video.
@@ -311,11 +307,9 @@ _"In this paper, we have introduced new architectures and training strategies fo
 
 Recently, there has been more work applying deep learning to speaker diarization problem.
 
-    - Learn speaker embeddings and use these embeddings to classify.
-
-    - Represent speaker identity using i-vectors.
-
-    - Bi-LSTM RNN 
+- Learn speaker embeddings and use these embeddings to classify.
+- Represent speaker identity using i-vectors.
+- Bi-LSTM RNN 
 
 In this paper, researchers have tried various strategies to tackle this problem.
 
