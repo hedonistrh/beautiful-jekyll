@@ -126,6 +126,23 @@ They are trying to solve speaker diarization problem via 2-step approach.
 
 After that, system compare embeddings via cosine similarity. If difference is bigger than determined threshold, system say _this comes from different speaker_.
 
+**Experiments**
+
+- _"To evaluate our method and compare it with the state of the art, we use following publicly available datasets: AMI meeting corpus [39] (100 hours, 150 speakers), ISCI meeting corpus [40] (72 hours, 50 speakers), and YouTube (YT) speakers corpus [41] (550 hours, 998 speakers)._ Also, they release [open source dataset](http://github.com/cyrta/broadcast-news-videos-dataset) from broadcast material which comes from major new stations.
+
+![alt text](https://docs.google.com/uc?id=1kbmjg2hszX0fuwd2gDjOk6wN_uTpVA97)
+
+- They split the data into training and validation with the proportion of %70 and %30.
+- Their baseline is state-of-art LIUM Speaker Diarization System which is baes on GMM classifier and uses 13 MFCC audio features as input. Also, they compare R-CNN with CNN via different features to understand effect of feature extraction.
+- Their performance metric is _Diarization Error Rate(DER)_ for evaluation.
+
+![alt text](https://docs.google.com/uc?id=1UlZMDQ9NbR4UkombtthzQeNIR2pM9Usc)
+
+
+- _"The results of the evaluation can be seen in Tab. 2. Our proposed deep learning architecture based on recurrent convolutional neural network and applied to CQT-grams outperforms the other methods across all datasets with a large margin. Its improvement reaches over 30% with respect o the baseline LIUM speaker diarization method with default set of parameters."_
+
+
+
 ### 6) [_SPEAKER DIARIZATION WITH LSTM_](https://arxiv.org/abs/1710.10468)
 
 _"In this paper, we build on the success of d-vector based speaker verification systems to develop a new d-vector based approach to speaker diarization. Specifically, we combine LSTM-based d-vector audio embeddings with recent work in non-parametric clustering to obtain a state-of-the-art speaker diarization system._
