@@ -76,7 +76,7 @@ Methodology of this work
 
 ### 3) [_TRISTOUNET: TRIPLET LOSS FOR SPEAKER TURN EMBEDDING_](https://arxiv.org/abs/1609.04301)
 
-_"TristouNet is a neural network architecture based on Long Short-Term Memory recurrent networks, meant to project speech sequences into a fixed-dimensional euclidean space. Thanks to the triplet loss paradigm used for training, the resulting sequence embeddings can be compared directly with the euclidean distance, for speaker comparison pur- poses."_
+_"TristouNet is a neural network architecture based on Long Short-Term Memory recurrent networks, meant to project speech sequences into a fixed-dimensional euclidean space. Thanks to the triplet loss paradigm used for training, the resulting sequence embeddings can be compared directly with the euclidean distance, for speaker comparison purposes."_
 
 ![alt text](https://docs.google.com/uc?id=12K2cZ0dZohRJaLEkgXlWxkqq2G-ZwNqd)
 
@@ -177,7 +177,7 @@ Spectral offline clustering algorithm consists of the following steps:
 
 - Perform eigen decomposition.
 
-##### _For more info, please look the [paper](https://arxiv.org/abs/1710.10468)
+##### For more info, please look the [paper](https://arxiv.org/abs/1710.10468)
 
 ![alt text](https://docs.google.com/uc?id=1N6KXrk_hdmS422YOU_-Wd-t3kVIpzYpk)
 
