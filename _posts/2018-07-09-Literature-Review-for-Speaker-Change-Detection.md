@@ -175,12 +175,14 @@ So that, they offer the novel *non-parametric spectral clustering* to solve thes
 - Fine tune parameters for each dataset.
 - For CALLHOME dataset, they tolerate errors less than 250 ms in locating segment boundaries.
 - Exclude overlapped speech.
+- In general, they observed that d-vector based systems outperform i-vector based systems.
 
+- They compare their result with state-of-art algorithms on CALLHOME dataset.
 
 ![alt text](https://docs.google.com/uc?id=1X1-cSylanhsYDKce1ThDj69kX2h_LiHt)
 
 
-- In general, they observed that d-vector based systems outperform i-vector based systems.
+
 
 
 [_Poster of the paper_](https://sigport.org/sites/default/files/docs/icassp2018_diarization_poster.pdf)
