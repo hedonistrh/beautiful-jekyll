@@ -57,6 +57,19 @@ Methodology of this work
     - Get all possible speaker homogeneous regions.
     - Retrain the same DNN again on these homogeneous segments of speech.
 
+**Experiments**
+
+- They use data from TED-LIUM and Youtube for training. To compare baseline methods, they use TED-LIUM evaluation data.
+
+![alt text](https://docs.google.com/uc?id=1ka7SDKEY481IF1Vfd0lmVSXyTP2I8F8h)
+
+
+- There are 2 different architecture. One for TED-LIUM, Youtube (_4000 - 2000 - 40 - 2000 - 4000_) and other one for YoutubeLarge. (_6000 - 2000 - 40 - 2000 - 6000 - 4000_) The embeddings layer is always 40. Because, they want to represent MFCC dimension with this layer.
+
+- They compare their result with state-of-art methods on the artificially created TIMIT dataset.
+
+![alt text](https://docs.google.com/uc?id=1bdaPmhY0pHH9W5WLpa1qj_y0yc6h4dvm)
+
 ### 3) [_TRISTOUNET: TRIPLET LOSS FOR SPEAKER TURN EMBEDDING_](https://arxiv.org/abs/1609.04301)
 
 _"TristouNet is a neural network architecture based on Long Short-Term Memory recurrent networks, meant to project speech sequences into a fixed-dimensional euclidean space. Thanks to the triplet loss paradigm used for training, the resulting sequence embeddings can be compared directly with the euclidean distance, for speaker comparison pur- poses."_
@@ -86,9 +99,20 @@ They use the MFCC which comes from overlapping slicing windows as input, output 
 
 - Bi-LSTMs allow the process sequences in forward and backward directions, making use of both past and future contexts.
 
-- To solve class imbalance, the number of positive labels is increased artificially by labelling as positive every frame in the direct neighborhood of the manually annotated change point.
+- To solve class imbalance, the number of positive labels is increased artificially by labelling as positive every frame in the direct neighborhood of the manually annotated change point. Positive neighboorhood of 100ms (50ms on both side) is used around each change point.
 
-- Long audio sequences are split into short fixed-length overlapping sequences.
+- Long audio sequences are split into short fixed-length overlapping sequences. These are 3.2s long with a step of 800 ms.
+
+**Experiments**
+
+- They use ETAPE TV subset. 
+- MFCC as input. 
+- Baselines are BIC, Gaussian Divergence (both of them use 2s adjacent windows) and TristouNet.
+
+
+![alt text](https://docs.google.com/uc?id=1hbOjusrAIPDr6GM5fs5dVUMrjmnrUykT)
+
+- _"We have developed a speaker change detection approach using bidirectional long short-term memory networks. Experimental results on the ETAPE dataset led to significant improvements over conventional methods (e.g., based on Gaussian divergence) and recent state-of-the-art results based on TristouNet embeddings."_
 
 ### 5) [_Speaker Diarization using Deep Recurrent Convolutional Neural Networks for Speaker Embeddings_](https://arxiv.org/abs/1708.02840)
 
@@ -143,6 +167,20 @@ The writers discuss why we can not conventional clustering algorithms like K-mea
 - *Hierarchical Structure*: The difference between one male and one female speaker is more than the difference between two male's clusters. This property, mostly, cause to K-means cluster all male's embeddings into one cluster and all female's embeddings into another cluster.
 
 So that, they offer the novel *non-parametric spectral clustering* to solve these problems. 
+
+**Experiment**
+
+- VAD is used.
+- They use _pyannote.metrics_ library for evaluation.
+- Fine tune parameters for each dataset.
+- For CALLHOME dataset, they tolerate errors less than 250 ms in locating segment boundaries.
+- Exclude overlapped speech.
+
+
+![alt text](https://docs.google.com/uc?id=1X1-cSylanhsYDKce1ThDj69kX2h_LiHt)
+
+
+- In general, they observed that d-vector based systems outperform i-vector based systems.
 
 
 [_Poster of the paper_](https://sigport.org/sites/default/files/docs/icassp2018_diarization_poster.pdf)
