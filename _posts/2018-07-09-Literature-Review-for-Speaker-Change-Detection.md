@@ -188,7 +188,7 @@ So that, they offer the novel *non-parametric spectral clustering* to solve thes
 **Experiment**
 
 - VAD is used.
-- They use _pyannote.metrics_ library for evaluation.
+- They use [_pyannote.metrics_](https://github.com/pyannote/pyannote-audio) library for evaluation.
 - Fine tune parameters for each dataset.
 - For CALLHOME dataset, they tolerate errors less than 250 ms in locating segment boundaries.
 - Exclude overlapped speech.
