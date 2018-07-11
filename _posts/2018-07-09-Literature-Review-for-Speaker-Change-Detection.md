@@ -301,9 +301,31 @@ They train *VGGVox* ,which is their neural embedding system, on short-term magni
 
 _"In this paper, we have introduced new architectures and training strategies for the task of speaker verification, and demonstrated state-of-the-art performance on the VoxCeleb1 dataset. Our learnt identity embeddings are compact (512D) and hence easy to store and useful for other tasks such as diarisation and retrieval."_
 
+### 10) [_TEXT-INDEPENDENT SPEAKER VERIFICATION USING 3D CONVOLUTIONAL NEURAL NETWORKS_](https://arxiv.org/abs/1705.09422)
 
+This paper is about _speaker verification_, however, it can give some idea about how we can use 3D CNN to create speaker models to represent different speakers.
 
-### 10) [_Deep Learning Approaches for Online Speaker Diarization_](http://web.stanford.edu/class/cs224s/reports/Chaitanya_Asawa.pdf)
+##### This project is open source. [Check it.](https://github.com/astorfi/3D-convolutional-speaker-recognition)
+
+This work's novelty comes from usage of **3D-CNN** to capture speaker variations and extract the spatial and temporal information. _"The main idea is to use a DNN architecture as a speaker feature extractor operating at frame and utterance-level for speaker classification."_ 
+
+Also they propose one shot learning to capture speaker utterances from the same speaker, instead of average the all d-vectors of the utterances of the targeted speaker.
+
+They compare their method with Locally-Connected Network(LCN) as a [baseline.](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/44681.pdf)
+- This network uses locally-connected layers to extract low level features, fully-connected layers to extract high level features. 
+- Loss function is cross-entropy for training. 
+- During the evaluation phase, cosine similarity is used.
+
+According to writers, this baseline method is not suitable to extract enough context of speaker related information, also baseline method is affected by non-speaker related information. To tackle these issues, they propose new model. Let's look their proposed architecture.
+- 3D CNN architecture is suitable to capture both spatial and temporal information.
+- Their input in the utterance level. 
+
+![alt text](https://docs.google.com/uc?id=1Er3VN8kP9n27YP2iUgHmzoq15eLD1-6O)
+
+- _"Our proposed method is to stack the feature maps for several different utterances spoken by the same speaker when used as the input to the CNN. So, instead of utilizing single utterance (in the development phase) and building speaker model based on the averaged representative features of different utterances from the same speaker (d-vector system)"_
+- They apply pooling operation just for the frequency domain to keep useful information which is in the time domain.
+
+### 11) [_Deep Learning Approaches for Online Speaker Diarization_](http://web.stanford.edu/class/cs224s/reports/Chaitanya_Asawa.pdf)
 
 Recently, there has been more work applying deep learning to speaker diarization problem.
 
@@ -327,7 +349,7 @@ Their proposed system can not capture some speaker changes which are short segme
 - _"Even in this task, we found that our models had difficulty capturing speaker change. As Figure 5 indicates, speakers are mostly speaking for few seconds each time they speak in a conversation – for example, we can imagine a lot of back-and-forth consisting of short segments: “(sentence)” “yeah” “(sentence)” “sure.” As a human listener, however, often these short snippets are looked over. This makes the problem of speaker detection very challenging because the model needs to rapidly identify that the speaker has changed and must also do this often."_
 
 
-### 11) [_Blind Speaker Clustering Using Phonetic and Spectral Features in Simulated and Realistic Police Interviews_](http://oxfordwaveresearch.com/papers/IAFPA-2012-BlindClusteringAlexanderForthPresentation.pdf)
+### 12) [_Blind Speaker Clustering Using Phonetic and Spectral Features in Simulated and Realistic Police Interviews_](http://oxfordwaveresearch.com/papers/IAFPA-2012-BlindClusteringAlexanderForthPresentation.pdf)
 
 This paper is related to product of Oxford Wave Research called as _Cleaver_. They focus on the pitch tracking. According to them, if there is any significant discontunies either in time or frequency, is used to define a candidate transition between spekaers and cluster. Let's look their proposed method step by step.
 
