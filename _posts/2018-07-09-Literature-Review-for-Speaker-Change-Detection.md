@@ -309,7 +309,7 @@ This paper is about _speaker verification_, however, it can give some idea about
 
 This work's novelty comes from usage of **3D-CNN** to capture speaker variations and extract the spatial and temporal information. _"The main idea is to use a DNN architecture as a speaker feature extractor operating at frame and utterance-level for speaker classification."_ 
 
-Also they propose one shot learning to capture speaker utterances from the same speaker, instead of average the all d-vectors of the utterances of the targeted speaker.
+Also they propose one shot learning to capture speaker utterances from the same speaker, instead of average the all d-vectors of the utterances of the targeted speaker. _"Our proposed method is, in essence, a one-shot representation method for which the background speaker model is created simultaneously with learning speaker characteristics._"
 
 They compare their method with Locally-Connected Network(LCN) as a [baseline.](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/44681.pdf)
 - This network uses locally-connected layers to extract low level features, fully-connected layers to extract high level features. 
@@ -324,6 +324,20 @@ According to writers, this baseline method is not suitable to extract enough con
 
 - _"Our proposed method is to stack the feature maps for several different utterances spoken by the same speaker when used as the input to the CNN. So, instead of utilizing single utterance (in the development phase) and building speaker model based on the averaged representative features of different utterances from the same speaker (d-vector system)"_
 - They apply pooling operation just for the frequency domain to keep useful information which is in the time domain.
+
+**Experiment**
+
+- They evaluate the model using the ROC (receiver operating characteristics) and PR (precision and recall) curves.
+
+##### For more info, check the [paper](https://arxiv.org/abs/1705.09422)
+
+- They use [WVU-Multimodal 2013 Dataset](https://github.com/astorfi/3D-convolutional-speaker-recognition/tree/master/data). _"The audio part of WVU-Multimodal dataset consists of up to 4 sessions of interviews for each of the 1083 different speakers."_
+
+- They use modified MFCC as the data representation. MFCC has a drawback about its non-local characteristic because of last DCT operation for generating MFCC. Non-local input is not suitable for Convolutional NN, so that, they just discard the last DCT operation. Thus, they produce Mel-frequency energy coefficients (MFEC). In addition to that, window size is 20ms with 10ms stride.
+
+- Their model outperforms the end-to-end training fashion.
+
+![alt text](https://docs.google.com/uc?id=1qsY3IApwEK0qGdIgH2iYNO9dzwdjwt_V)
 
 ### 11) [_Deep Learning Approaches for Online Speaker Diarization_](http://web.stanford.edu/class/cs224s/reports/Chaitanya_Asawa.pdf)
 
