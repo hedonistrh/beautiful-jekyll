@@ -2,19 +2,24 @@
 
 **Draft version. So that, there can be many typos and unreferenced quote. I will add their result and dataset. In addition to that, I will add some papers. Feel free to send e-mail to me.**
 
-Some useful links for dataset:
+In general, a speaker diarization system consists of two main parts: segmentation and clustering. Segmentation aims to detect all speaker change points. The most widely used method is the Bayesian Information Criterion (BIC) based segmentation. More recently, researcher focus to using of Deep Learning. 
+
+Speaker diarization is the task of determining “who spoke when” in an audio stream that usually contains an unknown amount of speech from an unknown number of speakers. Speaker change detection is an important part of speaker diarization systems. It aims at finding the boundaries between speech turns of two different speakers.
+
+
+Before papers, I just want to share some useful datasets.
+
 - [Mozilla Common Voice](https://voice.mozilla.org/en/data)
+- [Open SLR](https://www.openslr.org/resources.php) 
 - [VoxCeleb2 from Oxford](http://www.robots.ox.ac.uk/~vgg/data/voxceleb2/)
 - [TIMIT](https://catalog.ldc.upenn.edu/ldc93s1)
 - [TED-LIUM](http://www.openslr.org/7/)
+- [TED-LIUM 3](https://www.openslr.org/51/)
+- [LibriSpeech ASR corpus](https://www.openslr.org/12)
 - [AMI-CORPUS](http://groups.inf.ed.ac.uk/ami/corpus/)
 - [ISCI-CORPUS](http://groups.inf.ed.ac.uk/ami/icsi/)
 - [CALLHOME](https://catalog.ldc.upenn.edu/ldc97s42)
 - [WVU-Multimodal 2013 Dataset](https://biic.wvu.edu/data-sets/multimodal-dataset)
-
-In general, a speaker diarization system consists of two main parts: segmentation and clustering. Segmentation aims to detect all speaker change points. The most widely used method is the Bayesian Information Criterion (BIC) based segmentation. More recently, researcher focus to using of Deep Learning. 
-
-Speaker diarization is the task of determining “who spoke when” in an audio stream that usually contains an unknown amount of speech from an unknown number of speakers. Speaker change detection is an important part of speaker diarization systems. It aims at finding the boundaries between speech turns of two different speakers.
 
 
 ### 1) [_Multimodal Speaker Segmentation and Diarization using Lexical and Acoustic Cues via Sequence to Sequence Neural Networks_](https://arxiv.org/abs/1805.10731)
