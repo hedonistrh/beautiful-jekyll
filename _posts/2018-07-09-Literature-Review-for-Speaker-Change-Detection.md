@@ -201,8 +201,37 @@ So that, they offer the novel *non-parametric spectral clustering* to solve thes
 
 ![alt text](https://docs.google.com/uc?id=1X1-cSylanhsYDKce1ThDj69kX2h_LiHt)
 
-
 [_Poster of the paper_](https://sigport.org/sites/default/files/docs/icassp2018_diarization_poster.pdf)
+
+Also, I highly recommend the [ICASSP Lecture](https://www.youtube.com/watch?v=AkCPHw2m6bY&t=18s) which is given by Quan Wang who is the writer of this excellent paper.
+
+[![IMAGE ALT TEXT](https://img.youtube.com/vi/AkCPHw2m6bY/0.jpg)](http://www.youtube.com/watch?v=AkCPHw2m6bY "ICASSP 2018 Lecture Generalized End-to-End Loss for Speaker Verification")
+
+Also, I can give brief information about the lecture. Some of them is not directly related with _speaker change detection_. However, it can gives excellent insight how to handle with problems.
+
+- At Google, they use _2-stage speaker recognition: Enroll and verify_. Before the verification, user enrolls her voice with speak "OK Google" and "Hey Google". After that, they store the _averaged_ embedding vector.
+
+- **Generalized end-to-end loss**: For the verification, they create the embedding from input via LSTM. After that, they compare the embeddings with cosine similarity. If similarity is bigger than threshold, system verify the user. To extract speaker embedding, we need define _loss function_. 
+    - Most paper use Triplet Loss. It is very simple and can correctly models the embedding space, however, can not simulate _runtime behavior_. This means that it can not model averaging process. So that, it is not end-to-end.
+    - In 2016, writers propose _tuple end-to-end loss_. It can model the averaging process. However, most tuples are very easy to train. So that, it is not very efficient.
+
+    ![alt text](https://docs.google.com/uc?id=1kqzzQZ9uuhoxJ7ITxlDuW8qp8RbV6z5o)
+
+    - To tackle with this problem, they propose _generalized end-to-end loss_. To train with this loss, they construct a similarity matrix for each batch. Also, in the video, you can see effiency comparision between TE2E and GE2E.
+
+    ![alt text](https://docs.google.com/uc?id=1Q1_6Su8NuUKtr5IdYDN-DMz3xsBTA9ha)
+
+- **Single Speaker Recognition Model For Multi-Keyword**: Their dataset have 150M "OK Google" utterances and 1.2M "Hey Google" utterances. To tackle with this class imbalance, they propose _Multi-Reader_. This combines the loss from batches of different data sources. It is like _regularization_.
+
+![alt text](https://docs.google.com/uc?id=1omTp5yrYUc-d2ancOaaz_jERUfjXLybZ)
+
+- **Text Independent Verification**: The challenge is that length of utterance can vary. Naive solution is full sequence training, however, it can be very slow. They propose the _sliding window inference_. When train the system, they use the batch which include same length.
+
+![alt text](https://docs.google.com/uc?id=1kPzEWPF942O8vIzlvVD9ViN2ANMbU5yq)
+
+##### Please check the [video](https://www.youtube.com/watch?v=AkCPHw2m6bY&t=18s) and [paper](https://arxiv.org/pdf/1710.10467.pdf) for results. Unfortunately, I can not cover all of them in this blog-post. 
+
+
 
 ### 7) [_Deep Speaker: an End-to-End Neural Speaker Embedding System_](https://arxiv.org/abs/1705.02304v1)
 
