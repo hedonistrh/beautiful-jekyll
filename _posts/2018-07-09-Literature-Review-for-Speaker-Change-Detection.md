@@ -99,6 +99,8 @@ This figure depicts how embedding is created from sequence.
 
 ### 4) [_Speaker Change Detection in Broadcast TV using Bidirectional Long Short-Term Memory Networks_](https://pdfs.semanticscholar.org/edff/b62b32ffcc2b5cc846e26375cb300fac9ecc.pdf)
 
+##### This project is [open source](https://github.com/pyannote/pyannote-audio).
+
 Speaker change detection is like a binary seqeunce labelling task and addressed by Bidirectional long short term memory networks. (Bi-LSTM)
 
 Previously, writers proposed _TristouNet_, at that system, euclidean distance is used. But, that system tend to miss boundaries in fast speaker interactions because of relatively long adjacent sliding windows. (2 seconds or more)
