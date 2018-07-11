@@ -3,8 +3,14 @@
 **Draft version. So that, there can be many typos and unreferenced quote. I will add their result and dataset. In addition to that, I will add some papers. Feel free to send e-mail to me.**
 
 Some useful links for dataset:
-- https://voice.mozilla.org/en/data
-- http://www.robots.ox.ac.uk/~vgg/data/voxceleb2/
+- [Mozilla Common Voice](https://voice.mozilla.org/en/data)
+- [VoxCeleb2 from Oxford](http://www.robots.ox.ac.uk/~vgg/data/voxceleb2/)
+- [TIMIT](https://catalog.ldc.upenn.edu/ldc93s1)
+- [TED-LIUM](http://www.openslr.org/7/)
+- [AMI-CORPUS](http://groups.inf.ed.ac.uk/ami/corpus/)
+- [ISCI-CORPUS](http://groups.inf.ed.ac.uk/ami/icsi/)
+- [CALLHOME](https://catalog.ldc.upenn.edu/ldc97s42)
+- [WVU-Multimodal 2013 Dataset](https://biic.wvu.edu/data-sets/multimodal-dataset)
 
 In general, a speaker diarization system consists of two main parts: segmentation and clustering. Segmentation aims to detect all speaker change points. The most widely used method is the Bayesian Information Criterion (BIC) based segmentation. More recently, researcher focus to using of Deep Learning. 
 
