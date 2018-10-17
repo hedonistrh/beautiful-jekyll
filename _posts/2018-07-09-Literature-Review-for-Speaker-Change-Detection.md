@@ -1,6 +1,10 @@
 # Literature Review for Speaker Change Detection
 
-**Draft version. So that, there can be many typos and unreferenced quote. I will add their result and dataset. In addition to that, I will add some papers. Feel free to send e-mail to me.**
+**Draft version. So that, there can be many typos and unreferenced quote. Feel free to send e-mail to me.**
+
+> UPDATE(17 October 2018): After the conversation with [Quan Wang](https://wangquan.me), I am trying to keep my blogpost up-to-date. I am very grateful because of his help and effort.
+ 
+> I have added _FULLY SUPERVISED SPEAKER DIARIZATION_. I will add Herve Bredin's new paper as soon as possible.
 
 In general, a speaker diarization system consists of two main parts: segmentation and clustering. Segmentation aims to detect all speaker change points. The most widely used method is the Bayesian Information Criterion (BIC) based segmentation. More recently, researcher focus to using of Deep Learning. 
 
@@ -244,7 +248,136 @@ Also, I can give brief information about the lecture. Some of them is not direct
 
 ##### Please check the [video](https://www.youtube.com/watch?v=AkCPHw2m6bY&t=18s) and [paper](https://arxiv.org/pdf/1710.10467.pdf) for results. Unfortunately, I can not cover all of them in this blog-post. 
 
+##### **For the ICASSP's presenation of the paper, you can check [this video](https://www.youtube.com/watch?v=pjxGPZQeeO4). I highly recommend it. :)**
 
+### 7) [_FULLY SUPERVISED SPEAKER DIARIZATION_](https://arxiv.org/pdf/1810.04719.pdf)
+
+This paper comes from the writer who is the writer of [previous paper](https://arxiv.org/abs/1710.10468). Previous paper use unsupervised method for clustering, however, this paper use supervised method. So that, their method is fully supervised.
+
+They called this system as _unbounded interleaved-state recurrent neural networks (UIS-RNN)_. **They use same baseline to extract d-vector with [previous paper](https://arxiv.org/abs/1710.10468).** After the extraction, each individual speaker is modeled by parameter-sharing RNN, while the RNN states for different speakers interleave in the time domain. With this method, system decodes in an online fashion. Also, their method is naturally integrated with ddCRP. Thus, system can learn how many speakers are there in the record. 
+
+UIS-RNN method is based on three facts:
+
+- We can model each speaker as an instance of RNN _(These instances share same parameters)_
+- We do not have any constraint to specify speaker number. System can learn-guess how many speakers are there.
+- The states of different RNN instances corresponding to different speakers. These different speakers interleaved in the time domain. 
+
+#### **Overview of Approach**
+
+_I do not want to give all mathematical backgrond. I am trying to simplify it._
+
+- For the sequence embbeding, we will use **X**. This represent d-vector of a segment.
+- For the ground truth label, we will use **Y**. For instance, Y = (1, 2, 2, 3, 3) These numbers represent speaker id. 
+
+UIS-RNN is a generative process. 
+
+![alt text](https://docs.google.com/uc?id=15Eq7u7P5eMjS8VIMNvUK-R5hTw5DopFp)
+
+At that formula, we do not have speaker change information. So that, we define new parameter **Z** to represent speaker change. Now, we have augmented represenation.
+
+![alt text](https://docs.google.com/uc?id=1IKfKgi88l3EnM-0pm6a7aktTyAXEJuIR)
+
+For instance corresponding Z for the Y = (1 ,1 ,2, 3, 2, 2) is Z = (0, 1, 1, 1, 0). Because, when you look the Y, you can see that for second, third and fourth transition, there is a speaker change. So that, we write 1 at corresponding locations of Z.
+
+_Note that, we can directly determine Z from Y. However, we can not uniquely determine Y from Z. Because, we can not know which speaker will come when there is a speaker change._
+
+We can factorize the augmented representation.
+
+![alt text](https://docs.google.com/uc?id=1aYFEQna5O0EX0L7WKL_d37_diqxKDcGO)
+
+Now we have
+- Sequence Generation
+- Speaker Assigment
+- Speaker Change
+
+__Speaker Change__
+
+z<sub>t</sub> represent speaker change. As we know from probability, z<sub>t</sub> is between 0 and 1. 
+
+This can be parameterized via any function. However, writers use constant value for simplicity. So that it becomes binary variables.
+
+![alt text](https://docs.google.com/uc?id=1w9VKpbvCFMD4uyE6cXQTh1vyE-QlsbBH)
+
+**Speaker Assigment Process**
+
+For the speaker diarization, one of the main challenge is that determine total number of speakers. For this challenge, researchers use  _distance dependent Chinese restaurant process (ddCRP)_ which is a Bayesian non-parametric model. 
+
+When z<sub>t</sub> is 1, we know that there is a speaker change. At that point, there are 2 option. It can back to previously appeared speaker or switch to a new speaker.
+
+- The probability of switching back to a previously appeared speaker is proportional to the number of continuous speeches she/he has spoken. - There is also a chance to switch to a new speaker, with a probability proportional to a constant α. 
+
+![alt text](https://docs.google.com/uc?id=1NM-LKpALz9VdgtZSDw26fmPnzMeQsFfE)
+
+__Sequence Generation__
+
+_"Our basic assumption is that, the observation sequence of speaker embeddings X is generated by distributions that are parameterized by the output of an RNN. This RNN has multiple instantiations, corresponding to different speakers, and they share the same set of RNN parameters θ."_
+
+They use GRU as RNN architecture to memorize long-term. 
+
+State of GRU corresping to speaker z<sub>t</sub>:
+ > m<sub>t</sub> = f(m<sub>t</sub>/θ) _This is the output of the entire newtork._
+
+Let t' be the last time we saw speaker<sub>t</sub> before t
+
+> t' := max{0, s < t : y<sub>s</sub> = y<sub>t</sub>} 
+
+
+> ht = GRU(x<sub>s'</sub> , h<sub>s'</sub> |θ)
+
+__Summary of the Model__
+
+![alt text](https://docs.google.com/uc?id=1CuqgEY2VQeR795r3UjjNo9amRa8OvZqb)
+
+##### Researcher omit Z and λ for simplicity. 
+
+- Current stage, y<sub>[6]</sub> = (1, 1, 2, 3, 2, 2)
+
+- There are four options, it can continue with same speaker which is 2, it can back to existing speakers which are 1 and 3 or it can swtich to a new speaker which will be 4. This is based on previous label assigment y<sub>[6]</sub> and previous observation sequence x<sub>[6]</sub>
+
+##### I will skip details of MLE and MAP for sake of simplicity. For the details, please check the excellent paper.
+
+- **For Training**
+
+    System will try to maximize MLE estimation. 
+
+    ![alt text](https://docs.google.com/uc?id=1yGizh4XcYfINWrn8Ukc7GZ3Rue9khCmJ)
+
+- **For Testing**
+
+    System will decode and ideal goal is to find:
+
+    ![alt text](https://docs.google.com/uc?id=1IrK446DfnOAxiKPPmIU1qkEUn9k5HaHB)
+
+**Experiments and Results**
+
+- **Speaker Recognition Model**
+
+    They use three different model.
+
+    - “d-vector V1”. This model is trained with 36M utterances from 18K US English speakers, which are all mobile phone data based on anonymized voice query logs
+    - "d-vector V2". More training data has been added to V1.
+    - “dvector V3” retrained by using variable-length windows, where the window size is drawn from a uniform distribution within [240ms, 1600ms] during training.
+
+    Results for speaker verification task.
+
+    ![alt text](https://docs.google.com/uc?id=1Y4TR3wawMg4Kvkl-x9BM7I20xrSs98GU)
+
+- **UIS-RNN Setup**
+    - One layer of 512 GRU cells with a tanh activation
+    - Followed by two fully-connected layers each with 512 nodes and a ReLU activation. 
+    - The two fully-connected layers
+
+For the evaluation they use [pyannote.metrics](http://pyannote.github.io/pyannote-metrics) as evaluation metrics and NIST Speaker Recognition Evaluation as dataset.
+
+![alt text](https://docs.google.com/uc?id=1QCtubDJ0PTe524DUKjhCmRBWh75ohqpK)
+
+As we can see, when they use V3, their result significantly improved. Because, it uses variable-length windows. 
+
+UIS-RNN can beat offline-clustering methods even produces speaker labels in an **online** fashion.
+
+**Conclusions**
+
+_"Since all components of this system can be learned in a supervised manner, it is preferred over unsupervised systems in scenarios where training data with high quality time-stamped speaker labels are available."_
 
 ### 7) [_Deep Speaker: an End-to-End Neural Speaker Embedding System_](https://arxiv.org/abs/1705.02304v1)
 
