@@ -6,9 +6,12 @@
  
 > I have added _FULLY SUPERVISED SPEAKER DIARIZATION_. I will add Herve Bredin's new paper as soon as possible.
 
-In general, a speaker diarization system consists of two main parts: segmentation and clustering. Segmentation aims to detect all speaker change points. The most widely used method is the Bayesian Information Criterion (BIC) based segmentation. More recently, researcher focus to using of Deep Learning. 
 
 Speaker diarization is the task of determining “who spoke when” in an audio stream that usually contains an unknown amount of speech from an unknown number of speakers. Speaker change detection is an important part of speaker diarization systems. It aims at finding the boundaries between speech turns of two different speakers.
+
+![alt text](https://docs.google.com/uc?id=1ESCzgM-T9RRa-i7ozQFBR8ihUzO-OAPC)
+
+##### **This slide is belongs to [this video](https://www.youtube.com/watch?v=pjxGPZQeeO4). I highly recommend it. :)**
 
 
 Before papers, I just want to share some useful datasets.
