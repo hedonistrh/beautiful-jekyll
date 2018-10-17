@@ -325,7 +325,7 @@ Let t' be the last time we saw speaker<sub>t</sub> before t
 > t' := max{0, s < t : y<sub>s</sub> = y<sub>t</sub>} 
 
 
-> h<sub>t</sub> = GRU(x<sub>s'</sub> , h<sub>s'</sub> |θ)
+> h<sub>t</sub> = GRU(x<sub>s'</sub> , h<sub>s'</sub> /θ)
 
 __Summary of the Model__
 
