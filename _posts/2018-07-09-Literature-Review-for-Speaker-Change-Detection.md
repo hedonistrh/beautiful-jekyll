@@ -1,10 +1,11 @@
 # Literature Review for Speaker Change Detection
 
-**Draft version. So that, there can be many typos and unreferenced quote. Feel free to send e-mail to me.**
+**Draft version. So that, there can be many typos and unreferenced quote. Also, please reach me, if you want to add different paper. Feel free to send e-mail to me.**
 
-> UPDATE(17 October 2018): After the conversation with [Quan Wang](https://wangquan.me), I am trying to keep my blogpost up-to-date. I am very grateful because of his help and effort.
- 
-> I have added _FULLY SUPERVISED SPEAKER DIARIZATION_. I will add Herve Bredin's new paper as soon as possible.
+> UPDATE(17 October 2018): After the conversation with [Quan Wang](https://wangquan.me), I am trying to keep my blogpost up-to-date. I am very grateful because of his help and effort. I have added _FULLY SUPERVISED SPEAKER DIARIZATION_. ~~I will add Herve Bredin's new paper as soon as possible.~~
+
+
+> UPDATE(29 October 2018): I have added _Neural speech turn segmentation and affinity propagation for speaker diarization_. 
 
 
 Speaker diarization is the task of determining “who spoke when” in an audio stream that usually contains an unknown amount of speech from an unknown number of speakers. Speaker change detection is an important part of speaker diarization systems. It aims at finding the boundaries between speech turns of two different speakers.
@@ -138,7 +139,100 @@ They use the MFCC which comes from overlapping slicing windows as input, output 
 
 - _"We have developed a speaker change detection approach using bidirectional long short-term memory networks. Experimental results on the ETAPE dataset led to significant improvements over conventional methods (e.g., based on Gaussian divergence) and recent state-of-the-art results based on TristouNet embeddings."_
 
-### 5) [_Speaker Diarization using Deep Recurrent Convolutional Neural Networks for Speaker Embeddings_](https://arxiv.org/abs/1708.02840)
+### 5) [_Neural speech turn segmentation and affinity propagation for speaker diarization_](https://www.isca-speech.org/archive/Interspeech_2018/pdfs/1750.pdf)
+
+They divide speaker diarization system to 4 sub-tasks:
+- Speech Activity Detection (SAD)
+- Speaker Change Detection (SCD)
+- Speech Turn Clustering 
+- Re-segmentation
+
+Herve Bredin's previous [paper](https://pdfs.semanticscholar.org/edff/b62b32ffcc2b5cc846e26375cb300fac9ecc.pdf) explain the how they solve the Speech Activity Detection(SAD) and Speaker change Detection(SCD) via recurrent neural network, however, they used traditional methods to solve other 2 sub-taks at that paper. With these paper, they develop new approach to solve speaker diarization problem jointly.
+
+![alt text](https://docs.google.com/uc?id=1nU8baMghp_nhas0F1XmXXPh2VTk5DcOW)
+
+
+- Use LSTM for re-segmentation
+- Use _Affinity propagation_ for speech turn clustering
+
+We can list the contribution of this paper as:
+- Adapt LSTM-based SAD and SCD with unsupervised resegmentation. _Previously, a GMM is trained for each cluster(speech segments which include same speaker) re-segment these with Viterbi decoding._
+
+- Use affinitity propagation clustering on top of neural speaker embeddings. (_In the context of neural networks, embeddings are low-dimensional, learned continuous vector representations of discrete variables. Neural network embeddings are useful because they can reduce the dimensionality of categorical variables and meaningfully represent categories in the transformed space._ [Source](https://towardsdatascience.com/neural-network-embeddings-explained-4d028e6f0526))
+
+- Joinly optimize whole steps which are LSTM-based SAD, LSTM-based SCD, LSTM-based speaker embeddings and LSTM-based re-segmentation (Just speech turn clustering is not based on RNN)
+
+Now, let's deep dive into these contributions.
+
+**Sequence Labeling based on LSTM**
+
+At the previous paper, they used sequence labeling based on LSTM for speaker change detection and speech activity detection. With these modules, DNN create initial segmentation. (For more info, please check previous summary)
+
+At that paper, they used same method (LSTM based) for re-segmentation. _Previously, re-segmentation is usually solved by GMMs and Viterbi decoding._ At test time, using the output of the clustering step (initial segmentation) as its unique training file, the neural network is trained for a tunable number of epochs _E_ and applied on the very same test file it has been trained on. After that, resulting sequence of K-dimensional score has been post-processed to determine new speech segments.
+
+Drawback of this resegmentation is that increase false alarm.
+
+**Clustering**
+
+Speech turn clustering is solved by combination of he neural embeddings and affinitity propogation.
+
+At the neural embedding stage, we are trying to embed speech sequences into a D-dimensional space. When we embed whole sequences into this space, we expect that if two sequences comes from same speaker, they will be closer in this space. _(Their angular distance will be small)_ To get embed of one segment, we need to process variable length segment, however, we should have fixed-length embeddings. To solve this problem, 
+- Slide a fixed length window
+- Embed each of these subsequences
+- Sum these embedding
+
+![alt text](https://docs.google.com/uc?id=1rbZLw0aYh0GsNEprj6pEIVaHcVWz6Bcx)
+
+_The goal of SAD and SCD is to produce pure speaker segments containing a single speaker. The clustering stage is then responsible for grouping these segments based on speaker identities._
+
+Herve Bredin and his team choose affinity propagation (AP) algorithm for clustering. Ap does not require a prior choice of the number of clusters. These means that, we do not have to specify how many speakers are there in the whole speech. All segments are potential for cluster centers. (These centers represent different speakers) When algorithm decide to examplers (cluster centers), it uses negative angular distance between embeddings to understand similarity. _(I do not want to give whole mathematics behind this algorithm. Please check [this wonderful blogpost](https://www.ritchievink.com/blog/2018/05/18/algorithm-breakdown-affinity-propagation/))_
+
+
+**Joint Optimization**
+
+Mostly, speaker diarization modules are tuned with empiricially(trial-and-error) Also, whole modules are tuned independently. Researcher use Tree-structured Parzen Estimator for hyper-parameter optimization. This method is available in [hyperopt](https://github.com/hyperopt/hyperopt).
+
+**Experiments**
+
+_This project is [open-source](github.com/yinruiqing/diarization_with_neural_approach). So, you can reproduce results. Herve Bredin and his team deserves Kudos. :)_
+
+For feature extraction, they use Yaafe toolkit and use 19 MFCC, their first and second derivatives and the first and second derivatives of the energy. It means that, input is 59 dimensional.
+
+For sequence labeling, SAD, SCD and re-segmentation modules share a similar network architecture.
+
+![alt text](https://docs.google.com/uc?id=12u6UpGLv14Pd1_adbuQP28RCuFJ_tYKn)
+
+For sequence embedding, 
+
+For dataset and evaluation metric, they use French TV broadcast. 
+
+![alt text](https://docs.google.com/uc?id=13S3JTC1aL_QtGtmVSFC5VpiMAoaJZA_Q)
+
+They compare their results with two alternative approach
+- Variant of the proposed approach, just they use standard hierarchical agglomerative clustering instead of affinity propogation
+- S4D system which is developed by LIUM. This method use following approach:
+_"Segmentation based on Gaussian divergence first generates (short) pure segments. Adjacent segments from the same speaker are then fused based on the Bayesian Information Criterion (BIC), leading to (longer) speech turns. Hierachical clustering based on Cross-Likelihood Ratio then groups them into pure clusters, further grouped into larger clusters using another i-vector-based clustering."_
+
+![alt text](https://docs.google.com/uc?id=1U9TAr17NoThCs-ZlMSVCi9ChbFbA1KVo)
+
+As we know from re-segmentation step, we need to determine _E_ to get best score. When we look at this figure, we can see that, we need same number of epochs for development and test set. This means that, LSTM-based re-segmentation is stable.
+
+![alt text](https://docs.google.com/uc?id=1DB2Flihupva3rxihPfZPVS4qwR791C8P)
+
+
+
+**Results and Conclusion**
+
+- This pipeline is big step to reach integrated end-to-end neural approach to speaker diarization. Because, researcher show that initial segmentation and re-segmentation can be formulated via LSTM based sequence labeling.
+
+- Affinity propagation outperforms the standart agglomerative clustering with complete-link.
+
+**Future Direction**
+
+- _"However, in re-segmentation step, finding the best epoch E relies on a development set. We plan to investigate a way to automatically select the best epoch for each file."_
+- _"In addition, though neural networks can be used to embed and compare pairs of speech segments, it remains unclear how to do also cluster them in a differentiable manner."_
+
+### 6) [_Speaker Diarization using Deep Recurrent Convolutional Neural Networks for Speaker Embeddings_](https://arxiv.org/abs/1708.02840)
 
 They are trying to solve speaker diarization problem via 2-step approach.
 
@@ -167,7 +261,7 @@ After that, system compare embeddings via cosine similarity. If difference is bi
 
 
 
-### 6) [_SPEAKER DIARIZATION WITH LSTM_](https://arxiv.org/abs/1710.10468)
+### 7) [_SPEAKER DIARIZATION WITH LSTM_](https://arxiv.org/abs/1710.10468)
 
 _"In this paper, we build on the success of d-vector based speaker verification systems to develop a new d-vector based approach to speaker diarization. Specifically, we combine LSTM-based d-vector audio embeddings with recent work in non-parametric clustering to obtain a state-of-the-art speaker diarization system._
 
@@ -253,7 +347,7 @@ Also, I can give brief information about the lecture. Some of them is not direct
 
 ##### **For the ICASSP's presenation of the paper, you can check [this video](https://www.youtube.com/watch?v=pjxGPZQeeO4). I highly recommend it. :)**
 
-### 7) [_FULLY SUPERVISED SPEAKER DIARIZATION_](https://arxiv.org/pdf/1810.04719.pdf)
+### 8) [_FULLY SUPERVISED SPEAKER DIARIZATION_](https://arxiv.org/pdf/1810.04719.pdf)
 
 This paper comes from the writer who is the writer of [previous paper](https://arxiv.org/abs/1710.10468). Previous paper use unsupervised method for clustering, however, this paper use supervised method. So that, their method is fully supervised.
 
