@@ -202,8 +202,6 @@ For sequence labeling, SAD, SCD and re-segmentation modules share a similar netw
 
 ![alt text](https://docs.google.com/uc?id=12u6UpGLv14Pd1_adbuQP28RCuFJ_tYKn)
 
-For sequence embedding, 
-
 For dataset and evaluation metric, they use French TV broadcast. 
 
 ![alt text](https://docs.google.com/uc?id=13S3JTC1aL_QtGtmVSFC5VpiMAoaJZA_Q)
