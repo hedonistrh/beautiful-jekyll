@@ -7,6 +7,7 @@
 
 > UPDATE(29 October 2018): I have added _Neural speech turn segmentation and affinity propagation for speaker diarization_. 
 
+> UPDATE(12 November 2018): Quan Wang's and his team publish the [source code](https://github.com/google/uis-rnn) of the [FULLY SUPERVISED SPEAKER DIARIZATION[(https://arxiv.org/pdf/1810.04719.pdf)
 
 Speaker diarization is the task of determining “who spoke when” in an audio stream that usually contains an unknown amount of speech from an unknown number of speakers. Speaker change detection is an important part of speaker diarization systems. It aims at finding the boundaries between speech turns of two different speakers.
 
@@ -346,6 +347,8 @@ Also, I can give brief information about the lecture. Some of them is not direct
 ##### **For the ICASSP's presenation of the paper, you can check [this video](https://www.youtube.com/watch?v=pjxGPZQeeO4). I highly recommend it. :)**
 
 ### 8) [_FULLY SUPERVISED SPEAKER DIARIZATION_](https://arxiv.org/pdf/1810.04719.pdf)
+
+##### This project is open-source. Please check the [source code.](https://github.com/google/uis-rnn)
 
 This paper comes from the writer who is the writer of [previous paper](https://arxiv.org/abs/1710.10468). Previous paper use unsupervised method for clustering, however, this paper use supervised method. So that, their method is fully supervised.
 
