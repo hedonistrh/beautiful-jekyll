@@ -7,7 +7,7 @@
 
 > UPDATE(29 October 2018): I have added _Neural speech turn segmentation and affinity propagation for speaker diarization_. 
 
-> UPDATE(12 November 2018): Quan Wang's and his team publish the [source code](https://github.com/google/uis-rnn) of the [FULLY SUPERVISED SPEAKER DIARIZATION[(https://arxiv.org/pdf/1810.04719.pdf)
+> UPDATE(12 November 2018): Quan Wang's and his team publish the [source code](https://github.com/google/uis-rnn) of the [FULLY SUPERVISED SPEAKER DIARIZATION](https://arxiv.org/pdf/1810.04719.pdf)
 
 Speaker diarization is the task of determining “who spoke when” in an audio stream that usually contains an unknown amount of speech from an unknown number of speakers. Speaker change detection is an important part of speaker diarization systems. It aims at finding the boundaries between speech turns of two different speakers.
 
